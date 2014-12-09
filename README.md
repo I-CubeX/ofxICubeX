@@ -16,7 +16,8 @@ Compatibility
 | Android  | Limited       | Yes           |  Yes* |
 
 *Requires class compliant USB MIDI adapter
-Limited: can only be used in stand alone mode to receive MIDI messages *from* the digitizer, requires existing configuration on Desktop system using the ICubeX Editor. In this case, simply connect the digitizer using the USB interface and parse MIDI messages directly using ofxMidi example (tutorial for this TBD).
+
+Limited: can only be used in stand alone mode to receive MIDI messages from the digitizer, and requires an existing stand alone configuration on Desktop system using the ICubeX Editor. In this case, the oF app cannot change the settings/operation mode of the digitizer, but once set up (via the desktop Editor), the digitizer can be used as a standard MIDI out device, and messages can be parsed using the inputExample from ofxMidi (TBD: tutorial for this). 
 
 Other (non-default) Addons required:
 
