@@ -1,0 +1,4 @@
+ofxXmlSettings
+ofxICubeX
+ofxMidi
+ofxUI

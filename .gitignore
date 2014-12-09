@@ -1,0 +1,36 @@
+*.a
+*.app
+*.DS_STORE
+
+xcuserdata
+xcshareddata
+libs/ICubeXInterface
+*.xcworkspace
+
+exampleICubeXiOS
+
+#do add fonts and other assets in the bin directory
+!bin/GUI
+
+#VS/Windows related
+*.exp
+*.ilk
+*.lastbuildstate
+*.unsuccessfulbuild
+*.lib
+*.sdf
+*.suo
+*.obj
+*.tlog
+*.log
+*.pdb
+*.cache
+*.exe
+*.opensdf
+*.idb
+*.res
+
+
+#XCode related
+UserInterfaceState.xcuserstate
+Breakpoints_v2.xcbkptlist

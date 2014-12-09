@@ -1,0 +1,31 @@
+#OSX
+.DS_STORE
+*.a
+*.app
+
+src/ICubeXInterface
+
+#VS/Windows related
+*.exp
+*.ilk
+*.lastbuildstate
+*.unsuccessfulbuild
+*.lib
+*.sdf
+*.suo
+*.obj
+*.tlog
+*.log
+*.pdb
+*.cache
+*.exe
+*.opensdf
+*.idb
+*.res
+*.rc
+
+#XCode related
+UserInterfaceState.xcuserstate
+Breakpoints_v2.xcbkptlist
+xcshareddata
+
