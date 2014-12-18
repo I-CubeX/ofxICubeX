@@ -1,18 +1,10 @@
 *.a
 *.app
-*.DS_STORE
 
-xcuserdata
-xcshareddata
-*.xcworkspace
-
-exampleICubeXiOS
-
-#do add fonts and other assets in the bin directory
-!bin/GUI
+html
+latex
 
 #VS/Windows related
-*.exp
 *.ilk
 *.lastbuildstate
 *.unsuccessfulbuild
@@ -28,7 +20,7 @@ exampleICubeXiOS
 *.opensdf
 *.idb
 *.res
-
+*.rc
 
 #XCode related
 UserInterfaceState.xcuserstate
