@@ -1,7 +1,7 @@
 ofxICubeX
 
 Addon to interface with [ICubeX digitizers](http://infusionsystems.com/catalog/index.php/cPath/21). Currently tested with the USB-microDig, WI-microdig and the MIDI Digitizer (first 8 ports). Supports both sensor input and actuator output. 
-Linux versions should work pending a serial->midi interface, and will be updated when it is implemented.
+
 
 On portable platforms, the supported features are limited, as shown in the following table:
 
@@ -11,7 +11,7 @@ Compatibility
 |----------| ------------- | ------------- | ---------------- |
 | Windows  | Yes           | Yes           |  Yes* |
 | OSX      | Yes           | Yes           |  Yes* |
-| Linux    | Future        | Future        | Future |
+| Linux    | Yes           | Yes           |  Yes* |
 | iOS      | Limited       | No            |  Yes* |
 | Android  | Limited       | Yes           |  Yes* |
 
@@ -34,6 +34,13 @@ OSX:
 - USB-microDig: 
 - - USB Driver (https://www.silabs.com/products/mcu/Pages/USBtoUARTBridgeVCPDrivers.aspx) 
 - - ICubeX [Connect](http://infusionsystems.com/catalog/product_info.php/products_id/331)
+
+Linux:
+- USB-microDig:
+- - Tested with Ubuntu 10.04LTS, and Raspbian (For Raspberry Pi)
+- - UBB Driver built into most modern releases
+- - Serial->midi bridge, such as this [modified version of ttymidi](https://gist.github.com/johnty/de8b3d3041c7ee43accd) which passes SysEx data to/from the USB serial device.
+- Wi-microDig: to be tested/documented.
 
 iOS:
 - No special setup is required, other than making sure the required addons are in the path.
