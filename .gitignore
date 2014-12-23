@@ -1,6 +1,7 @@
 *.a
 *.app
 *.DS_STORE
+*.d
 
 xcuserdata
 xcshareddata
