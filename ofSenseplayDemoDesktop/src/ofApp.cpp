@@ -23,8 +23,8 @@
 void ofApp::setup(){
         
         //todo: port management - gui perhaps?
-        int portInIndex = 0;
-        int portOutIndex = 0;
+        int portInIndex = 1;
+        int portOutIndex = 1;
         
 #ifdef TARGET_OF_IPHONE
         ofSetOrientation(OF_ORIENTATION_90_RIGHT);

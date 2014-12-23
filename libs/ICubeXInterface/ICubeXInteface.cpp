@@ -5,7 +5,7 @@
 ///  Created by Johnty Wang on 2014-09-16. johnty@infusionsystems.com
 ///
 ///
-
+#include <stdio.h>
 #include "ICubeXInteface.h"
 
 ICubeXInterface::ICubeXInterface() {

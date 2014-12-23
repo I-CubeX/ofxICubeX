@@ -6,7 +6,7 @@
 ///
 ///
 /// 
-
+#include <stdio.h>
 #include "ICubeXDigitizerState.h"
 
 ICubeXDigitizerState::ICubeXDigitizerState() {
