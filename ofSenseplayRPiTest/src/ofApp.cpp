@@ -19,7 +19,7 @@ bool isFS = true;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-
+    ofHideCursor();
     ofSetFrameRate(60);
     streamData = true;
     isHiRes = false;
@@ -67,12 +67,20 @@ void ofApp::setup(){
         statusOutputStrs.push_back("No MIDI Ports available!");
     }
     ofxOMXPlayerSettings settings;
-    settings.videoPath = ofToDataPath("vid/video01.mp4");
+    //NOTE: we need to create symlink in bin/data/usb->/media/usb0 (or wherever media gets mounted)
+    settings.videoPath = ofToDataPath("usb/vid/video01.mp4");
     settings.useHDMIForAudio = false;
     settings.enableTexture = true;
     settings.enableLooping = true;
     settings.enableAudio = true;
-    omxPlayer.setup(settings);
+
+    if (ofFile::doesFileExist(settings.videoPath,false)) {
+       omxPlayer.setup(settings);
+       statusOutputStrs.push_back("file exists!");
+    }
+    else {
+       statusOutputStrs.push_back("video does not exist!");
+    }
     ofSetFullscreen(isFS);
     ofBackground(0);
     myICubeX.setStream(streamData, 0);
