@@ -61,9 +61,8 @@ There are three example applications. Once the driver is loaded and Connect is r
 
 - - exampleICubeX: a more featured GUI application that visually shows sensor data, and allows control of a number of parameters of the digitizer
 - - exampleSimpleICubeX: a bare bones app showing the basic commands for talking to the digitizer. if you want to hook up to sensors directly, this is a good place to start as the relevant features are not interlarded with GUI setup code. The setup() function in ofApp.cpp contains comments walking through the process of connecting to, setting up and getting data from the ICubeX digitizers.
-- - ofSenseplayDemo: a demo [SensePlay](http://sense-play.com/) application that uses input from two sensors to trigger presense of a person at a public kiosk and navigate interactively through media
 
 
 Created by Johnty Wang (johnty@infusionsystems.com) Oct 2014
 
-Latest revision 9 Dec 2014
+Latest revision 13 Jan 2015
