@@ -56,9 +56,13 @@ private:
 
     int myClickCount;
     int currPlayIndex;
-    bool isActive;
+    bool isCounting; //timer before triggering "isActive"
+    bool isActive;   //are we in slideshow mode?
     int presenseThres;
     int swipeThres;
+
+    unsigned long long lastTime;
+    unsigned waitTime_ms;
 
     int sensorPresence;
     int sensorSwipe;

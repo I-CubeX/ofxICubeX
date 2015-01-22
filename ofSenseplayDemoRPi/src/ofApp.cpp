@@ -30,9 +30,11 @@ void ofApp::setup(){
 
     isActive = false;
 
-    presenseThres = 30;
+    presenseThres = 15;
     swipeThres = 15;
     mySwipeState = SWIPE_NONE;
+    waitTime_ms = 2000;
+    isCounting = false;
 
     if (setupSensors()) {
         printf("I-CubeX digitizer setup successful!\n");
@@ -84,16 +86,43 @@ void ofApp::updateSensorData() {
 
     //check for "presence": if person is close enough
     //todo: perhaps create an ofxSmartThresh object?
-    if ( (sensorPresence > presenseThres) && !isActive ) {
-        isActive = true;
-        printf("user enter\n");
-        vidPlayer.setPaused(true);
+    if ( (sensorPresence > presenseThres) && !isActive) {
+        if (!isCounting) { //start counting
+            isCounting = true;
+            printf("starting enter timer\n");
+            lastTime = ofGetElapsedTimeMillis();
+        }
+        else { //check if we've remained high for enough
+            unsigned long long elapsed = ofGetElapsedTimeMillis() - lastTime;
+            if (elapsed >= waitTime_ms) {
+                isActive = true;
+                isCounting = false;
+                printf("enter timer hit");
+                vidPlayer.setPaused(true);
+            }
+        }
+
     }
-    else if ( (sensorPresence < (presenseThres - HYSTERISIS_OFFSET)) && isActive ){
-        isActive = false;
-        printf("user exit\n");
-        vidPlayer.setPaused(false);
+    // low presense sensor value case
+    if ( (sensorPresence < (presenseThres - HYSTERISIS_OFFSET)) ){
+        if (isActive) {
+            isActive = false;
+            printf("user exit\n");
+            vidPlayer.setPaused(false);
+        }
+        else {
+            if (isCounting) {
+                unsigned long long elapsed = ofGetElapsedTimeMillis() - lastTime;
+                if (elapsed >= waitTime_ms) {
+                    printf("counter timeout no trigger; reset timer\n");
+                    isCounting = false;
+                }
+
+            }
+        }
+
     }
+
 
     if (isActive) {
         if ( (mySwipeState == SWIPE_NONE) && (sensorSwipe > swipeThres) ) {
@@ -106,6 +135,9 @@ void ofApp::updateSensorData() {
             printf("exit swipe, inc count\n");
 
         }
+    }
+    else {
+        vidPlayer.setPaused(false);
     }
 }
 
