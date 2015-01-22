@@ -211,12 +211,13 @@ void ofApp::loadVidList() {
     dir.allowExt("mov");
     //populate the directory object
     dir.listDir();
+    dir.sort();
     ofLogVerbose() <<" *** Loading Video List ***"<<endl;
     myVidFileList = dir.getFiles();
 
     for (std::vector<int>::size_type i = 0; i != myVidFileList.size(); i++) {
 
-
+        printf("file %i = %s\n", i, myVidFileList[i].getFileName().c_str() );
         ofLogVerbose() <<"added " << "usb/img/"<<myVidFileList[i].getFileName() <<endl;
     }
 }
