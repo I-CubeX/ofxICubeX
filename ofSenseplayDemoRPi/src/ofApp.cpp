@@ -193,7 +193,7 @@ void ofApp::loadNextMovie()
 		videoCounter = 0;
 	}
 	//skipTimeStart = ofGetElapsedTimeMillis();
-	printf("loading new movie...\n");
+	printf("loading new movie... vidC = %i\n", videoCounter);
 	vidPlayer.loadMovie(myVidFileList[videoCounter].path());
 	printf("...loaded new movie %s\n",myVidFileList[videoCounter].path().c_str());
 	//skipTimeEnd = ofGetElapsedTimeMillis();
@@ -229,6 +229,7 @@ void ofApp::loadImgs() {
     dir.allowExt("jpg");
     //populate the directory object
     dir.listDir();
+    dir.sort();
     vector <ofFile> files = dir.getFiles();
     ofLogVerbose() <<" *** Loading Images ***"<<endl;
     for (std::vector<int>::size_type i = 0; i != files.size(); i++) {
