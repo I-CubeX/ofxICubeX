@@ -31,10 +31,12 @@ void ofApp::setup(){
     isActive = false;
 
     presenseThres = 30;
-    swipeThres = 50;
+    swipeThres = 15;
     mySwipeState = SWIPE_NONE;
 
-    setupSensors();
+    if (setupSensors()) {
+        printf("I-CubeX digitizer setup successful!\n");
+    }
 
 
     ofSetFullscreen(isFS);
@@ -78,17 +80,19 @@ void ofApp::updateSensorData() {
     sensorSwipe = myICubeX.getSensorData(7);
     string outLine = ofToString(sensorPresence)+":"+ofToString(sensorSwipe);
     statusOutputStrs.push_back(outLine);
-    printf("sensors data = %s\n",outLine.c_str());
+    //printf("sensors data = %s\n",outLine.c_str());
 
     //check for "presence": if person is close enough
     //todo: perhaps create an ofxSmartThresh object?
     if ( (sensorPresence > presenseThres) && !isActive ) {
         isActive = true;
         printf("user enter\n");
+        vidPlayer.setPaused(true);
     }
     else if ( (sensorPresence < (presenseThres - HYSTERISIS_OFFSET)) && isActive ){
         isActive = false;
         printf("user exit\n");
+        vidPlayer.setPaused(false);
     }
 
     if (isActive) {
@@ -112,14 +116,18 @@ void ofApp::draw(){
     int line = 0;
     ofBackground(0);
     ofSetColor(255,255,255);
-    if (!isActive) {
+    {
         if (vidPlayer.isTextureEnabled) {
             vidPlayer.draw(0, 0, ofGetWidth(), ofGetHeight());
         }
     }
-    else { //show slideshow
-        ofSetColor(255,0,0);
-        ofRect(50, 50, 200, 200);
+    if (isActive) { //show slideshow
+        //int x = 50* (myClickCount % myImages.size());
+        //ofSetColor(255,0,0);
+        //ofRect(50+x, 50, 200, 200);
+        int imgIdx = myClickCount % myImages.size();
+        ofImage* img = &myImages.at(imgIdx);
+        img->draw(0, 0, ofGetWidth(), ofGetHeight());
     }
 
    // ofSetColor(0, 0, 255);
