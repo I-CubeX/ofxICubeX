@@ -97,8 +97,9 @@ void ofApp::updateSensorData() {
             if (elapsed >= waitTime_ms) {
                 isActive = true;
                 isCounting = false;
-                printf("enter timer hit");
-                vidPlayer.setPaused(true);
+                printf("enter timer hit\n");
+                //vidPlayer.setPaused(true);
+                myClickCount = 0;
             }
         }
 
@@ -108,7 +109,6 @@ void ofApp::updateSensorData() {
         if (isActive) {
             isActive = false;
             printf("user exit\n");
-            vidPlayer.setPaused(false);
         }
         else {
             if (isCounting) {
@@ -117,10 +117,8 @@ void ofApp::updateSensorData() {
                     printf("counter timeout no trigger; reset timer\n");
                     isCounting = false;
                 }
-
             }
         }
-
     }
 
 
@@ -153,13 +151,14 @@ void ofApp::draw(){
             vidPlayer.draw(0, 0, ofGetWidth(), ofGetHeight());
         }
     }
-    if (isActive) { //show slideshow
-        //int x = 50* (myClickCount % myImages.size());
-        //ofSetColor(255,0,0);
-        //ofRect(50+x, 50, 200, 200);
-        int imgIdx = myClickCount % myImages.size();
-        ofImage* img = &myImages.at(imgIdx);
-        img->draw(0, 0, ofGetWidth(), ofGetHeight());
+    if (isActive) {
+        ofRect(ofGetWidth()-10, ofGetHeight()-10, 10, 10);
+
+        if (myClickCount > 0) { //start slideshow on 2nd swipe
+             int imgIdx = (myClickCount-1) % myImages.size();
+            ofImage* img = &myImages.at(imgIdx);
+            img->draw(0, 0, ofGetWidth(), ofGetHeight());
+        }
     }
 
    // ofSetColor(0, 0, 255);
