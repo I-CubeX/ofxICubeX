@@ -5,7 +5,7 @@
 #include "ofxICubeX.h"
 #include "ofxOMXPlayer.h"
 
-#define HYSTERISIS_OFFSET 20
+#define HYSTERISIS_OFFSET 5
 
 class ofApp : public ofBaseApp, public ofxOMXPlayerListener {
 
@@ -57,7 +57,8 @@ private:
     int myClickCount;
     int currPlayIndex;
     bool isActive;
-    int activationThres;
+    int presenseThres;
+    int swipeThres;
 
     int sensorPresence;
     int sensorSwipe;
@@ -65,4 +66,5 @@ private:
     SwipeState mySwipeState;
 
     bool isStandalone;
+    bool isDebug;
 };

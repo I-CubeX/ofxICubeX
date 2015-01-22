@@ -30,6 +30,10 @@ void ofApp::setup(){
 
     isActive = false;
 
+    presenseThres = 30;
+    swipeThres = 50;
+    mySwipeState = SWIPE_NONE;
+
     setupSensors();
 
 
@@ -72,21 +76,27 @@ void ofApp::updateSensorData() {
     //update sensor values
     sensorPresence = myICubeX.getSensorData(0);
     sensorSwipe = myICubeX.getSensorData(7);
+    string outLine = ofToString(sensorPresence)+":"+ofToString(sensorSwipe);
+    statusOutputStrs.push_back(outLine);
+    printf("sensors data = %s\n",outLine.c_str());
 
     //check for "presence": if person is close enough
-    if (sensorPresence > activationThres) {
+    //todo: perhaps create an ofxSmartThresh object?
+    if ( (sensorPresence > presenseThres) && !isActive ) {
         isActive = true;
+        printf("user enter\n");
     }
-    else {
+    else if ( (sensorPresence < (presenseThres - HYSTERISIS_OFFSET)) && isActive ){
         isActive = false;
+        printf("user exit\n");
     }
 
     if (isActive) {
-        if ( (mySwipeState == SWIPE_NONE) && (sensorSwipe > activationThres) ) {
+        if ( (mySwipeState == SWIPE_NONE) && (sensorSwipe > swipeThres) ) {
             mySwipeState = SWIPE_ENTER;
             printf("enter swipe\n");
         }
-        if ( (mySwipeState == SWIPE_ENTER) && (sensorSwipe < (activationThres - HYSTERISIS_OFFSET) ) )  {
+        if ( (mySwipeState == SWIPE_ENTER) && (sensorSwipe < (swipeThres - HYSTERISIS_OFFSET) ) )  {
             mySwipeState = SWIPE_NONE;
             myClickCount++;
             printf("exit swipe, inc count\n");
@@ -129,6 +139,8 @@ void ofApp::keyPressed(int key){
     else if (key == 'h') {
     }
     else if (key == 's') {
+    }
+    else if (key == 'd') {
 
     }
     else if (key == 'f') {
@@ -281,6 +293,7 @@ bool ofApp::setupSensors() {
 
 
     myICubeX.setStream(streamData, 0);
+    myICubeX.setStream(streamData, 7);
 
     return true;
 
