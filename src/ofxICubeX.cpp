@@ -159,7 +159,7 @@ void ofxICubeX::newMidiMessage(ofxMidiMessage &msg) {
 
         //debug output what the thing looks like
         ofLogVerbose("rawSysEx") << "rcv data size = "<< msg.bytes.size()<<endl << "data = ";
-        if (ofGetLogLevel() <= OF_LOG_NOTICE) {
+        if (ofGetLogLevel() <= OF_LOG_VERBOSE) {
             for (int i=0; i<msg.bytes.size(); i++) {
                 std::cout<<"0x"<< std::hex << (int) msg.bytes.at(i)<<" ";
             }
@@ -175,8 +175,8 @@ void ofxICubeX::newMidiMessage(ofxMidiMessage &msg) {
             curr.push_back(*it);
             if (*it == 0xf7) {
             //send it to the sysex parser
-                if (ofGetLogLevel() <= OF_LOG_NOTICE) {
-                    //std::cout<<" !!! " <<endl;
+                if (ofGetLogLevel() <= OF_LOG_VERBOSE) {
+                    std::cout<<" !!! " <<endl;
                 }
                 ParseSysEx(curr);
                 curr.clear();
