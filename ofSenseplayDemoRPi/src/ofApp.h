@@ -41,6 +41,8 @@ public:
 private:
     bool setupSensors();
 
+    string getTimeStamp();
+
     ofxICubeX myICubeX;
     std::vector<string> statusOutputStrs;
     bool streamData;

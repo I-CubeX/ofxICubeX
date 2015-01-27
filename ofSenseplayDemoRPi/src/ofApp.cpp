@@ -81,15 +81,16 @@ void ofApp::updateSensorData() {
     sensorPresence = myICubeX.getSensorData(0);
     sensorSwipe = myICubeX.getSensorData(7);
     string outLine = ofToString(sensorPresence)+":"+ofToString(sensorSwipe);
-    statusOutputStrs.push_back(outLine);
+    //statusOutputStrs.push_back(outLine);
     //printf("sensors data = %s\n",outLine.c_str());
+    ofLogVerbose() << sensorPresence<<":"<<sensorSwipe;
 
     //check for "presence": if person is close enough
     //todo: perhaps create an ofxSmartThresh object?
     if ( (sensorPresence > presenseThres) && !isActive) {
         if (!isCounting) { //start counting
             isCounting = true;
-            printf("starting enter timer\n");
+            //printf("starting enter timer\n");
             lastTime = ofGetElapsedTimeMillis();
         }
         else { //check if we've remained high for enough
@@ -97,7 +98,9 @@ void ofApp::updateSensorData() {
             if (elapsed >= waitTime_ms) {
                 isActive = true;
                 isCounting = false;
-                printf("enter timer hit\n");
+                string output = getTimeStamp()+ ": user entered";
+                //printf("%s\n",output.c_str());
+                ofLogNotice<< output<<endl;
                 //vidPlayer.setPaused(true);
                 myClickCount = 0;
             }
@@ -108,13 +111,16 @@ void ofApp::updateSensorData() {
     if ( (sensorPresence < (presenseThres - HYSTERISIS_OFFSET)) ){
         if (isActive) {
             isActive = false;
-            printf("user exit\n");
+            //printf("user exit\n");
+            string output = getTimeStamp() + ": user exit";
+            //printf("%s\n", output.c_str());
+            ofLogNotice<< output<<endl;
         }
         else {
             if (isCounting) {
                 unsigned long long elapsed = ofGetElapsedTimeMillis() - lastTime;
                 if (elapsed >= waitTime_ms) {
-                    printf("counter timeout no trigger; reset timer\n");
+                    ofLogVerbose()<<"counter timeout no trigger; reset timer"<<endl;
                     isCounting = false;
                 }
             }
@@ -125,12 +131,14 @@ void ofApp::updateSensorData() {
     if (isActive) {
         if ( (mySwipeState == SWIPE_NONE) && (sensorSwipe > swipeThres) ) {
             mySwipeState = SWIPE_ENTER;
-            printf("enter swipe\n");
+            ofLogVerbose() << "enter swipe"<<endl;
         }
         if ( (mySwipeState == SWIPE_ENTER) && (sensorSwipe < (swipeThres - HYSTERISIS_OFFSET) ) )  {
             mySwipeState = SWIPE_NONE;
             myClickCount++;
-            printf("exit swipe, inc count\n");
+            string output = getTimeStamp() + ": user swipe";
+            //printf("%s\n", output.c_str());
+            ofLogNotice<< output<<endl;
 
         }
     }
@@ -230,7 +238,8 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 
 void ofApp::onVideoEnd(ofxOMXPlayerListenerEventData& e) {
     doLoadNextMovie = true;
-    printf("video end; trigger load next\n");
+    ofLogVerbose() << "vid end, trigger next" << endl;
+    //printf("video end; trigger load next\n");
 }
 
 void ofApp::loadNextMovie()
@@ -244,9 +253,9 @@ void ofApp::loadNextMovie()
 		videoCounter = 0;
 	}
 	//skipTimeStart = ofGetElapsedTimeMillis();
-	printf("loading new movie... vidC = %i\n", videoCounter);
+	//printf("loading new movie... vidC = %i\n", videoCounter);
 	vidPlayer.loadMovie(myVidFileList[videoCounter].path());
-	printf("...loaded new movie %s\n",myVidFileList[videoCounter].path().c_str());
+	//printf("...loaded new movie %s\n",myVidFileList[videoCounter].path().c_str());
 	//skipTimeEnd = ofGetElapsedTimeMillis();
 	//amountSkipped = skipTimeEnd-skipTimeStart;
 	//totalAmountSkipped+=amountSkipped;
@@ -336,4 +345,9 @@ bool ofApp::setupSensors() {
 
     return true;
 
+}
+
+string ofApp::getTimeStamp() {
+    string output_str = ofToString(ofGetYear())+"-"+ofToString(ofGetMonth())+"-"+ofToString(ofGetDay())+"_"+ofToString(ofGetHours())+":"+ofToString(ofGetMinutes())+":"+ofToString(ofGetSeconds());
+    return output_str;
 }
