@@ -100,7 +100,7 @@ void ofApp::updateSensorData() {
                 isCounting = false;
                 string output = getTimeStamp()+ ": user entered";
                 //printf("%s\n",output.c_str());
-                ofLogNotice<< output<<endl;
+                ofLogNotice() << output<<endl;
                 //vidPlayer.setPaused(true);
                 myClickCount = 0;
             }
@@ -114,7 +114,7 @@ void ofApp::updateSensorData() {
             //printf("user exit\n");
             string output = getTimeStamp() + ": user exit";
             //printf("%s\n", output.c_str());
-            ofLogNotice<< output<<endl;
+            ofLogNotice() << output<<endl;
         }
         else {
             if (isCounting) {
@@ -138,7 +138,7 @@ void ofApp::updateSensorData() {
             myClickCount++;
             string output = getTimeStamp() + ": user swipe";
             //printf("%s\n", output.c_str());
-            ofLogNotice<< output<<endl;
+            ofLogNotice() << output<<endl;
 
         }
     }
