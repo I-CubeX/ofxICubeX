@@ -12,7 +12,7 @@ ofxICubeX::ofxICubeX() {
     is_midi_in_connected_ = false;
     is_midi_out_connected_ = false;
     ofSetLogLevel(OF_LOG_SILENT);
-    
+
     //set debugging options depending on OF Log Level
     if (ofGetLogLevel() <= OF_LOG_NOTICE) {
         SetDebug(true);
@@ -156,9 +156,9 @@ void ofxICubeX::newMidiMessage(ofxMidiMessage &msg) {
     if (msg.bytes.at(0) == 0xF0) {
         //we have SysEx... let interface class handle it
         //TODO: look at ID before parsing for multiple digitizer support?
-        
+
         //debug output what the thing looks like
-        ofLogNotice("rawSysEx") << "rcv data size = "<< msg.bytes.size()<<endl << "data = ";
+        ofLogVerbose("rawSysEx") << "rcv data size = "<< msg.bytes.size()<<endl << "data = ";
         if (ofGetLogLevel() <= OF_LOG_NOTICE) {
             for (int i=0; i<msg.bytes.size(); i++) {
                 std::cout<<"0x"<< std::hex << (int) msg.bytes.at(i)<<" ";
@@ -168,7 +168,7 @@ void ofxICubeX::newMidiMessage(ofxMidiMessage &msg) {
 
         int pos = 0;
         //break up into individual messages
-        
+
 
         std::vector<unsigned char> curr;
         for (std::vector<unsigned char>::iterator it = msg.bytes.begin(); it != msg.bytes.end(); ++it) {
@@ -176,19 +176,19 @@ void ofxICubeX::newMidiMessage(ofxMidiMessage &msg) {
             if (*it == 0xf7) {
             //send it to the sysex parser
                 if (ofGetLogLevel() <= OF_LOG_NOTICE) {
-                    std::cout<<" !!! " <<endl;
+                    //std::cout<<" !!! " <<endl;
                 }
                 ParseSysEx(curr);
                 curr.clear();
             }
         }
-        
+
     }
     else {
         ofLogNotice("rMidi") << msg.channel<<" "<<msg.control<<" "<<msg.value<<endl;
-        
+
     }
-    
+
 }
 
 void ofxICubeX::newMidiMessage(char *data, int len) {

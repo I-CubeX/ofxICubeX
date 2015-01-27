@@ -20,7 +20,7 @@ bool isFS = true;
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-    ofSetLogLevel(OF_LOG_SILENT);
+    ofSetLogLevel(OF_LOG_NOTICE);
 
     ofHideCursor();
     ofSetFrameRate(60);
