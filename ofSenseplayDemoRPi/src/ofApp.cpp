@@ -36,6 +36,20 @@ void ofApp::setup(){
     waitTime_ms = 2000;
     isCounting = false;
 
+
+    //try load from settings file
+    ofxXmlSettings settings;
+    bool haveSettingsFile = settings.loadFile("usb/sp_settings.xml");
+    if (haveSettingsFile) { //check settings file exists
+            presenseThres = settings.getValue("settings:PresenseThres", 15);
+            swipeThres = settings.getValue("settings:SwipeThres", 15);
+            waitTime_ms = settings.getValue("settings:WaitTime", 1500);
+            ofLogNotice() << "loaded .xml values: " << presenseThres<<" " << swipeThres<< " " << waitTime_ms<<endl;
+    }
+    else {
+        ofLogNotice()<< "usbroot/sp_settings.xml not found; using default values"<<endl;
+    }
+
     if (setupSensors()) {
         printf("I-CubeX digitizer setup successful!\n");
     }
@@ -110,11 +124,23 @@ void ofApp::updateSensorData() {
     // low presense sensor value case
     if ( (sensorPresence < (presenseThres - HYSTERISIS_OFFSET)) ){
         if (isActive) {
-            isActive = false;
-            //printf("user exit\n");
-            string output = getTimeStamp() + ": user exit";
-            //printf("%s\n", output.c_str());
-            ofLogNotice() << output<<endl;
+            //start timer here, if not counting
+            if (!isCounting) {
+                isCounting = true;
+                lastTime = ofGetElapsedTimeMillis();
+            }
+            else {
+                unsigned long long elapsed = ofGetElapsedTimeMillis() - lastTime;
+                if (elapsed >= waitTime_ms) {
+                    isActive = false;
+                    //printf("user exit\n");
+                    string output = getTimeStamp() + ": user exit";
+                    //printf("%s\n", output.c_str());
+                    ofLogNotice() << output<<endl;
+                }
+
+            }
+
         }
         else {
             if (isCounting) {
@@ -160,19 +186,23 @@ void ofApp::draw(){
         }
     }
     if (isActive) {
-        ofRect(ofGetWidth()-10, ofGetHeight()-10, 10, 10);
-
         if (myClickCount > 0) { //start slideshow on 2nd swipe
              int imgIdx = (myClickCount-1) % myImages.size();
             ofImage* img = &myImages.at(imgIdx);
             img->draw(0, 0, ofGetWidth(), ofGetHeight());
         }
     }
-
-   // ofSetColor(0, 0, 255);
-
-    if (streamData) {
-    }
+    //set colour of tiny rectangle in corner depending on mode
+    if (isActive && isCounting)
+        ofSetColor(0, 0, 255); //exiting
+    if (isActive && !isCounting)
+        ofSetColor(255,0,0); //active
+    if (!isActive && isCounting)
+        ofSetColor(0, 255, 0); //entering
+    if (!isActive && !isCounting)
+        ofSetColor(128, 128, 128); //idle
+    ofRect(ofGetWidth()-10, ofGetHeight()-10, 5, 5);
+    ofSetColor(255,255,255);
 }
 
 //--------------------------------------------------------------

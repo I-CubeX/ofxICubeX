@@ -4,6 +4,7 @@
 #include "ofxMidi.h"
 #include "ofxICubeX.h"
 #include "ofxOMXPlayer.h"
+#include "ofxXmlSettings.h"
 
 #define HYSTERISIS_OFFSET 5
 
