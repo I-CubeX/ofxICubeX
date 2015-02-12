@@ -73,6 +73,7 @@ void ofApp::setup(){
         vidPlayer.setup(vidSettings);
     }
     ofBackground(0);
+    nextTrigger = ofGetElapsedTimeMillis()+PING_INTERVAL_MINS*60*1000;
 
 }
 
@@ -87,6 +88,10 @@ void ofApp::update() {
 
     if (doLoadNextMovie) {
         loadNextMovie();
+    }
+    if (ofGetElapsedTimeMillis()>=nextTrigger) {
+        nextTrigger+=PING_INTERVAL_MINS*60*1000;
+        ofLogNotice() << "an hour passed" <<endl;
     }
 }
 
@@ -142,7 +147,7 @@ void ofApp::updateSensorData() {
             }
 
         }
-        else {
+        else { //not active, but counting
             if (isCounting) {
                 unsigned long long elapsed = ofGetElapsedTimeMillis() - lastTime;
                 if (elapsed >= waitTime_ms) {
