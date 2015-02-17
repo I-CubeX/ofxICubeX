@@ -6,7 +6,6 @@
 #include "ofxOMXPlayer.h"
 #include "ofxXmlSettings.h"
 
-#define HYSTERISIS_OFFSET 5
 #define PING_INTERVAL_MINS 60
 
 class ofApp : public ofBaseApp, public ofxOMXPlayerListener {
@@ -71,6 +70,7 @@ private:
 
     int sensorPresence;
     int sensorSwipe;
+    int sensorHyst;
 
     SwipeState mySwipeState;
 

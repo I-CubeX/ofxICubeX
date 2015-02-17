@@ -44,7 +44,8 @@ void ofApp::setup(){
             presenseThres = settings.getValue("settings:PresenseThres", 15);
             swipeThres = settings.getValue("settings:SwipeThres", 15);
             waitTime_ms = settings.getValue("settings:WaitTime", 1500);
-            ofLogNotice() << "loaded .xml values: " << presenseThres<<" " << swipeThres<< " " << waitTime_ms<<endl;
+            sensorHyst = settings.getValue("settings:Hyst", 2);
+            ofLogNotice() << "loaded .xml values: " << presenseThres<<" " << swipeThres<< " " << waitTime_ms <<" " << sensorHyst<<endl;
     }
     else {
         ofLogNotice()<< "usbroot/sp_settings.xml not found; using default values"<<endl;
@@ -127,7 +128,7 @@ void ofApp::updateSensorData() {
 
     }
     // low presense sensor value case
-    if ( (sensorPresence < (presenseThres - HYSTERISIS_OFFSET)) ){
+    if ( (sensorPresence < (presenseThres - sensorHyst)) ){
         if (isActive) {
             //start timer here, if not counting
             if (!isCounting) {
@@ -164,7 +165,7 @@ void ofApp::updateSensorData() {
             mySwipeState = SWIPE_ENTER;
             ofLogVerbose() << "enter swipe"<<endl;
         }
-        if ( (mySwipeState == SWIPE_ENTER) && (sensorSwipe < (swipeThres - HYSTERISIS_OFFSET) ) )  {
+        if ( (mySwipeState == SWIPE_ENTER) && (sensorSwipe < (swipeThres - sensorHyst) ) )  {
             mySwipeState = SWIPE_NONE;
             myClickCount++;
             string output = getTimeStamp() + ": user swipe";
