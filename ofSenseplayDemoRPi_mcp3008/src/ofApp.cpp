@@ -6,9 +6,7 @@
 ///
 /// Requirements:
 /// - Raspberry Pi Model B/B+ (ideally running our system image for autoplay, splashscreen, etc)
-/// - ttymidi with sysex support (infusion bitbucket)
-/// - usb microDig with sensors on port 1 and 8
-/// - USB key with videos in /vid and images in /img folders
+/// - wiringPi installed
 ///
 /// Jan 2015
 /// johnty@infusionsystems.com
@@ -98,8 +96,8 @@ void ofApp::update() {
 
 void ofApp::updateSensorData() {
     //update sensor values
-    sensorPresence = readADC(0);//myICubeX.getSensorData(0);
-    sensorSwipe = readADC(7);//myICubeX.getSensorData(7);
+    sensorPresence = ofMap(readADC(0), 0, 1023, 0, 127);//myICubeX.getSensorData(0);
+    sensorSwipe = ofMap(readADC(7), 0, 1023, 0, 127);//myICubeX.getSensorData(7);
     string outLine = ofToString(sensorPresence)+":"+ofToString(sensorSwipe);
     //statusOutputStrs.push_back(outLine);
     //printf("sensors data = %s\n",outLine.c_str());
@@ -338,9 +336,9 @@ void ofApp::loadImgs() {
 }
 
 bool ofApp::setupSensors() {
-    if (wiringPiSPISetup (0, 1000000) < 0) 
+    if (wiringPiSPISetup (0, 1000000) < 0)
         return false;
-    else 
+    else
         return true;
 
 }
