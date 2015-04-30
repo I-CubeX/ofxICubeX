@@ -2,7 +2,7 @@
 *.app
 *.DS_STORE
 *.d
-
+*.o
 xcuserdata
 xcshareddata
 *.xcworkspace
