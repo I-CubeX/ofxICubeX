@@ -1,0 +1,4 @@
+ofxGui
+ofxStk
+ofxMidi
+ofxICubeX
