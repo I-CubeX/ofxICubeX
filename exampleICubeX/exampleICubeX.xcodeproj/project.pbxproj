@@ -60,9 +60,6 @@
 		5312071219DDA42F00B26B01 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5312070C19DDA42F00B26B01 /* tinyxmlparser.cpp */; };
 		5312071319DDA42F00B26B01 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5312070E19DDA42F00B26B01 /* ofxXmlSettings.cpp */; };
 		5312071519DDB46F00B26B01 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5312071419DDB46F00B26B01 /* CoreMIDI.framework */; };
-		53AAF3161A150DE200D805E1 /* ofxAndroidMidiIn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 53AAF3111A150DE200D805E1 /* ofxAndroidMidiIn.cpp */; };
-		53AAF3171A150DE200D805E1 /* ofxAndroidMidiOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 53AAF3131A150DE200D805E1 /* ofxAndroidMidiOut.cpp */; };
-		53AAF3181A150DE200D805E1 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 53AAF3151A150DE200D805E1 /* README.md */; };
 		63D0FD8734D5760B8080C901 /* RtMidi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABDEF0ACF05BF28F5C74E008 /* RtMidi.cpp */; };
 		63F9FE1D90234FA6DE6F509E /* ofxMidi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E238CCDE032640E0FEBFAD82 /* ofxMidi.cpp */; };
 		83D9F930112E0944444124EE /* ofxMidiOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04F77E5C73A62E2E77C78EC6 /* ofxMidiOut.cpp */; };
@@ -233,11 +230,6 @@
 		5312070E19DDA42F00B26B01 /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
 		5312070F19DDA42F00B26B01 /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
 		5312071419DDB46F00B26B01 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
-		53AAF3111A150DE200D805E1 /* ofxAndroidMidiIn.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxAndroidMidiIn.cpp; sourceTree = "<group>"; };
-		53AAF3121A150DE200D805E1 /* ofxAndroidMidiIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxAndroidMidiIn.h; sourceTree = "<group>"; };
-		53AAF3131A150DE200D805E1 /* ofxAndroidMidiOut.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxAndroidMidiOut.cpp; sourceTree = "<group>"; };
-		53AAF3141A150DE200D805E1 /* ofxAndroidMidiOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxAndroidMidiOut.h; sourceTree = "<group>"; };
-		53AAF3151A150DE200D805E1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		712B183BC00EBFFB1EEA5AB8 /* ofxRtMidiOut.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxRtMidiOut.cpp; path = ../../../addons/ofxMidi/src/desktop/ofxRtMidiOut.cpp; sourceTree = SOURCE_ROOT; };
 		777394EA77EFAB49AC526069 /* ICubeXSysExTranslator.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ICubeXSysExTranslator.h; path = ../../../addons/ofxICubeX/libs/ICubeXInterface/ICubeXSysExTranslator.h; sourceTree = SOURCE_ROOT; };
 		81436E53CC4A77E326F659C3 /* ofxMidiOut.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxMidiOut.h; path = ../../../addons/ofxMidi/src/ofxMidiOut.h; sourceTree = SOURCE_ROOT; };
@@ -476,19 +468,6 @@
 			path = src;
 			sourceTree = "<group>";
 		};
-		53AAF3101A150DE200D805E1 /* android */ = {
-			isa = PBXGroup;
-			children = (
-				53AAF3111A150DE200D805E1 /* ofxAndroidMidiIn.cpp */,
-				53AAF3121A150DE200D805E1 /* ofxAndroidMidiIn.h */,
-				53AAF3131A150DE200D805E1 /* ofxAndroidMidiOut.cpp */,
-				53AAF3141A150DE200D805E1 /* ofxAndroidMidiOut.h */,
-				53AAF3151A150DE200D805E1 /* README.md */,
-			);
-			name = android;
-			path = ../../ofxMidi/src/android;
-			sourceTree = "<group>";
-		};
 		5A08CCDC8D19E7162DE57128 /* libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -530,7 +509,6 @@
 		9CBF51184BE294FD9D73043F /* src */ = {
 			isa = PBXGroup;
 			children = (
-				53AAF3101A150DE200D805E1 /* android */,
 				99DED6A5D3EDE030B1A80348 /* desktop */,
 				94B3C3C21F92F9310CA90986 /* ofxBaseMidi.cpp */,
 				4310BEFDE24FF04FEBEE8086 /* ofxBaseMidi.h */,
@@ -754,9 +732,7 @@
 				531206C519DDA27500B26B01 /* ofxUISpacer.cpp in Sources */,
 				531206BF19DDA27500B26B01 /* ofxUIRangeSlider.cpp in Sources */,
 				531206C319DDA27500B26B01 /* ofxUISlider.cpp in Sources */,
-				53AAF3171A150DE200D805E1 /* ofxAndroidMidiOut.cpp in Sources */,
 				531206B519DDA27500B26B01 /* ofxUIImageToggle.cpp in Sources */,
-				53AAF3181A150DE200D805E1 /* README.md in Sources */,
 				531206AA19DDA27500B26B01 /* ofxUICanvas.cpp in Sources */,
 				531206CB19DDA27500B26B01 /* ofxUIToggle.cpp in Sources */,
 				531206AD19DDA27500B26B01 /* ofxUIDropDownList.cpp in Sources */,
@@ -794,7 +770,6 @@
 				531206CE19DDA27500B26B01 /* ofxUIWaveform.cpp in Sources */,
 				531206BA19DDA27500B26B01 /* ofxUIMovingGraph.cpp in Sources */,
 				83D9F930112E0944444124EE /* ofxMidiOut.cpp in Sources */,
-				53AAF3161A150DE200D805E1 /* ofxAndroidMidiIn.cpp in Sources */,
 				531206C119DDA27500B26B01 /* ofxUIRotarySlider.cpp in Sources */,
 				531206B819DDA27500B26B01 /* ofxUILabelToggle.cpp in Sources */,
 				531206CD19DDA27500B26B01 /* ofxUIValuePlotter.cpp in Sources */,
