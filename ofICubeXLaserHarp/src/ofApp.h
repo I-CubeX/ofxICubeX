@@ -6,12 +6,18 @@
 #include "ofxGui.h"
 #include "ofxICubeX.h"
 
+#ifdef TARGET_RASPBERRY_PI
+#include "wiringPi.h"
+#include "wiringPiSPI.h"
+#endif //TARGET_RASPBERRY_PI
+
 class ofApp : public ofBaseApp{
 
 public:
     void setup();
     void update();
     void draw();
+    void exit();
     
     void keyPressed(int key);
     void keyReleased(int key);
@@ -24,6 +30,8 @@ public:
     void gotMessage(ofMessage msg);
     
     void loadWavePreset(int preset);
+    
+    void updateSensors();
     
     
     void audioOut(float *output, int bufferSize, int nChannels);
@@ -72,4 +80,11 @@ public:
     bool jDown;
     bool kDown;
     bool lDown;
+    
+    int sensorVals[8];
+    
+#if defined( TARGET_OSX ) || defined( TARGET_WIN32 )
+    ofxICubeX myICube;
+#endif // #if defined( TARGET_OSX ) || defined( TARGET_WIN32 )
+
 };

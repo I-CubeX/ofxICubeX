@@ -39,24 +39,39 @@ void ofApp::setup(){
     gain.addListener(this, &ofApp::adsrChanged);
     
     ofSoundStreamSetup(2, 0);
+    loadWavePreset(2);
+    
+#ifdef TARGET_OSX
+    myICube.connectMidiIn(0);
+    myICube.connectMidiOut(0);
+    myICube.setStream(1, 0);
+#endif
+    
+}
+
+void ofApp::updateSensors(){
+#ifdef TARGET_OSX
+    
+#endif
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-   
+
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    ofClear(0, 0, 0);
     ofSetColor(0, 255, 0);
-    ofRect(drawRegion);
+    //ofRect(drawRegion);
     ofSetColor(0, 0, 0);
-    ofLine(drawRegion.x, drawRegion.y + drawRegion.height/2, drawRegion.x + drawRegion.width, drawRegion.y + drawRegion.height/2);
+    //ofLine(drawRegion.x, drawRegion.y + drawRegion.height/2, drawRegion.x + drawRegion.width, drawRegion.y + drawRegion.height/2);
     ofSetColor(255, 0, 0);
-    wave.draw();
+    //wave.draw();
     
     ofSetColor(255,255,255);
-    instructions.drawString("Use mouse to draw inside the green rectangle.\nPress a,s,d,f,g,h,j,k,l to play your wave", 300, 100);
+    //instructions.drawString("Use mouse to draw inside the green rectangle.\nPress a,s,d,f,g,h,j,k,l to play your wave", 300, 100);
     
     gui.draw();
 }
@@ -330,4 +345,13 @@ void ofApp::audioOut(float *output, int bufferSize, int nChannels){
     }
 }
 
+void ofApp::exit(){
+#if defined( TARGET_OSX ) || defined( TARGET_WIN32 )
+    for (int i=0; i<kNUM_ICUBEX_SENSORS; i++) {
+        myICube.setStream(0, i);
+    }
+    myICube.disconnectMidiIn();
+    myICube.disconnectMidiOut();
+#endif //defined( TARGET_OSX ) || defined( TARGET_WIN32 ) 
+}
 
