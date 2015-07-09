@@ -11,7 +11,11 @@
 #include "wiringPiSPI.h"
 #endif //TARGET_RASPBERRY_PI
 
+static const char keyMap[] = {'a', 's', 'd', 'f', 'g', 'h', 'j', 'k'};
+
 class ofApp : public ofBaseApp{
+    
+    
 
 public:
     void setup();
@@ -81,10 +85,14 @@ public:
     bool kDown;
     bool lDown;
     
-    int sensorVals[8];
+    int sensorVals[kNUM_ICUBEX_SENSORS];
     
-#if defined( TARGET_OSX ) || defined( TARGET_WIN32 )
+#if defined(TARGET_OSX) || defined(TARGET_WIN32)
     ofxICubeX myICube;
-#endif // #if defined( TARGET_OSX ) || defined( TARGET_WIN32 )
+#endif // #if defined(TARGET_OSX) || defined(TARGET_WIN32)
+    
+#if defined(TARGET_RASPBERRY_PI)
+    int readADC(int adcnum);
+#endif //defined(TARGET_RASPBERRYPI)
 
 };

@@ -41,23 +41,50 @@ void ofApp::setup(){
     ofSoundStreamSetup(2, 0);
     loadWavePreset(2);
     
-#ifdef TARGET_OSX
+#if defined(TARGET_OSX) || defined(TARGET_WIN32)
     myICube.connectMidiIn(0);
     myICube.connectMidiOut(0);
-    myICube.setStream(1, 0);
-#endif
+    for (int i=0; i<kNUM_ICUBEX_SENSORS; i++){
+        myICube.setStream(1, i);
+    }
+#endif //defined(TARGET_OSX) || defined(TARGET_WIN32)
+
+#if defined(TARGET_RASPBERRY_PI)
+    wiringPiSPISetup (0, 1000000);
+#endif //defined(TARGET_RASPBERRY PI)
     
 }
 
 void ofApp::updateSensors(){
-#ifdef TARGET_OSX
+#if defined(TARGET_OSX) || defined(TARGET_WIN32)
+    for (int i=0; i<kNUM_ICUBEX_SENSORS; i++){
+        sensorVals[i] = myICube.getSensorData(i);
+    }
+#endif // defined(TARGET_OSX) || defined(TARGET_WIN32)
+#if defined(TARGET_RASPBERRY_PI)
+    for (int i=0; i<kNUM_ICUBEX_SENSORS; i++){
+        sensorVals[i] = readADC(i);
+    }
+#endif //defined(TARGET_RASPBERRY PI)
+
+    //TODO: RPi 10 bit scaling
     
-#endif
+    //now check for thresholds
+    int thres = 50;
+    
+    for (int i=0; i<kNUM_ICUBEX_SENSORS; i++)
+    {
+        if (sensorVals[i]>thres)
+            keyPressed(keyMap[i]);
+        else
+            keyReleased(keyMap[i]);
+    }
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
+    updateSensors();
 }
 
 //--------------------------------------------------------------
@@ -355,3 +382,18 @@ void ofApp::exit(){
 #endif //defined( TARGET_OSX ) || defined( TARGET_WIN32 ) 
 }
 
+#if defined(TARGET_RASPBERRY_PI)
+int ofApp::readADC(int adcnum)
+{
+    uint8_t buff[3];
+    int adc;
+    if ((adcnum > 7) || (adcnum < 0))
+        return -1;
+    buff[0] = 1;
+    buff[1] = (8+adcnum)<<4;
+    buff[2] = 0;
+    wiringPiSPIDataRW(0, buff, 3);
+    adc = ((buff[1]&3) << 8) + buff[2];
+    return adc;
+}
+#endif //defined(TARGET_RASPBERRY_PI)
