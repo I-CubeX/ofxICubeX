@@ -216,6 +216,7 @@
 		488D9EFA5DEB8B3A4A716F0C /* FileWrite.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = FileWrite.cpp; path = ../../ofxStk/libs/STK/src/FileWrite.cpp; sourceTree = SOURCE_ROOT; };
 		4FD0EE00FA862D53D0E23109 /* Modal.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = Modal.cpp; path = ../../ofxStk/libs/STK/src/Modal.cpp; sourceTree = SOURCE_ROOT; };
 		52AFA1F08C420992CAAAE648 /* ofxSlider.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxSlider.h; path = ../../ofxGui/src/ofxSlider.h; sourceTree = SOURCE_ROOT; };
+		532F921A1B458D3500695B3A /* ofICubeXLaserHarpDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ofICubeXLaserHarpDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		536DDD7F3DF2BAB1F119B49C /* Wurley.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = Wurley.h; path = ../../ofxStk/libs/STK/include/Wurley.h; sourceTree = SOURCE_ROOT; };
 		539F851F1B3CAE9F008B8FEF /* readme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme; sourceTree = "<group>"; };
 		539F85201B3CAE9F008B8FEF /* RtError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RtError.h; sourceTree = "<group>"; };
@@ -363,7 +364,6 @@
 		E45BE9770E8CC7DD009D7055 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		E45BE9790E8CC7DD009D7055 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
-		E4B69B5B0A3A1756003C02F2 /* ofICubeXLaserHarp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = ofICubeXLaserHarp.app; path = /Users/johnty/Documents/of_v0.8.1_osx_release/addons/ofxICubeX/ofICubeXLaserHarp/bin/ofICubeXLaserHarp.app; sourceTree = "<absolute>"; };
 		E4B69E1D0A3A1BDC003C02F2 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
 		E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofApp.cpp; path = src/ofApp.cpp; sourceTree = SOURCE_ROOT; };
 		E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ofApp.h; path = src/ofApp.h; sourceTree = SOURCE_ROOT; };
@@ -821,6 +821,7 @@
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
 				BB4B014C10F69532006C3DED /* addons */,
 				E45BE5980E8CC70C009D7055 /* frameworks */,
+				532F921A1B458D3500695B3A /* ofICubeXLaserHarpDebug.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -881,7 +882,7 @@
 			);
 			name = ofICubeXLaserHarp;
 			productName = myOFApp;
-			productReference = E4B69B5B0A3A1756003C02F2 /* ofICubeXLaserHarp.app */;
+			productReference = 532F921A1B458D3500695B3A /* ofICubeXLaserHarpDebug.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */

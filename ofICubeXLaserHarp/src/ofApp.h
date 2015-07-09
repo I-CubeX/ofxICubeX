@@ -23,6 +23,8 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
+    void loadWavePreset(int preset);
+    
     
     void audioOut(float *output, int bufferSize, int nChannels);
     

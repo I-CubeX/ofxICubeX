@@ -111,6 +111,12 @@ void ofApp::keyPressed(int key){
             drawSynth.noteOn(NoteD2, gain);
             lDown = true;
         }
+    }else if (key == '1'){
+        loadWavePreset(1);
+    }else if (key == '2'){
+        loadWavePreset(2);
+    }else if (key =='3'){
+        loadWavePreset(3);
     }
 }
 
@@ -199,6 +205,40 @@ void ofApp::mouseReleased(int x, int y, int button){
         drawSynth.setWaveTable(frames);
     }
     drawingBegan = false;
+}
+
+
+void ofApp::loadWavePreset(int preset){
+    wave.clear();
+    switch (preset) {
+        case 1: //square wave
+            for (int i=0; i<(int)drawRegion.width; i++){
+                int x = i + drawRegion.x;
+                int y = drawRegion.y+drawRegion.height/2;
+                if (i < (int)drawRegion.width/2)
+                    y+=drawRegion.height/20;
+                else
+                    y-=drawRegion.height/20;
+                wave.addVertex(x, y);
+            }
+            break;
+        case 2:
+            for (int i=0; i<(int)drawRegion.width; i++){
+                int x = i + drawRegion.x;
+                float y = drawRegion.y+drawRegion.height/2 + drawRegion.height/2 * sin(4*pi*i/drawRegion.width);
+                wave.addVertex(x, y);
+            }
+            break;
+        case 3:
+            for (int i=0; i<(int)drawRegion.width; i++){
+                int x = i + drawRegion.x;
+                float y = drawRegion.y+drawRegion.height*3/4 - 0.5*i*drawRegion.height/drawRegion.width;
+                wave.addVertex(x, y);
+            }
+            break;
+    }
+    StkFrames frames = createWaveTableFromDrawing();
+    drawSynth.setWaveTable(frames);
 }
 
 //--------------------------------------------------------------
