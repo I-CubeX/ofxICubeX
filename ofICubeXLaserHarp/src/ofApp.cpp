@@ -12,6 +12,8 @@ const float NoteB = 123.47;
 const float NoteC2 = 130.81;
 const float NoteD2 = 146.83;
 
+int thres = 50;
+
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofNoFill();
@@ -70,7 +72,7 @@ void ofApp::updateSensors(){
     //TODO: RPi 10 bit scaling
     
     //now check for thresholds
-    int thres = 50;
+    
     
     for (int i=0; i<kNUM_ICUBEX_SENSORS; i++)
     {
@@ -91,6 +93,25 @@ void ofApp::update(){
 void ofApp::draw(){
     ofClear(0, 0, 0);
     ofSetColor(0, 255, 0);
+    
+    
+
+
+    for (int i=0; i<kNUM_ICUBEX_SENSORS; i++) {
+        //draw 8 lines for the notes
+        ofSetLineWidth(2.5);
+        ofSetColor(0,255,0);
+        int dx = ofGetWidth()/(kNUM_ICUBEX_SENSORS+1);
+        int x = (i+1)*dx;
+        ofLine(x, 0, x, ofGetHeight());
+        
+        if (sensorVals[i]>thres) {
+            ofSetColor(255, 0, 0);
+            ofSetLineWidth(3.0);
+            ofLine(x, 0, x, ofGetHeight());
+        }
+    }
+    
     //ofRect(drawRegion);
     ofSetColor(0, 0, 0);
     //ofLine(drawRegion.x, drawRegion.y + drawRegion.height/2, drawRegion.x + drawRegion.width, drawRegion.y + drawRegion.height/2);
@@ -258,20 +279,20 @@ void ofApp::loadWavePreset(int preset){
                 int x = i + drawRegion.x;
                 int y = drawRegion.y+drawRegion.height/2;
                 if (i < (int)drawRegion.width/2)
-                    y+=drawRegion.height/20;
+                    y+=drawRegion.height/5;
                 else
-                    y-=drawRegion.height/20;
+                    y-=drawRegion.height/50;
                 wave.addVertex(x, y);
             }
             break;
-        case 2:
+        case 2: //sine
             for (int i=0; i<(int)drawRegion.width; i++){
                 int x = i + drawRegion.x;
                 float y = drawRegion.y+drawRegion.height/2 + drawRegion.height/2 * sin(4*pi*i/drawRegion.width);
                 wave.addVertex(x, y);
             }
             break;
-        case 3:
+        case 3: //ramp
             for (int i=0; i<(int)drawRegion.width; i++){
                 int x = i + drawRegion.x;
                 float y = drawRegion.y+drawRegion.height*3/4 - 0.5*i*drawRegion.height/drawRegion.width;
