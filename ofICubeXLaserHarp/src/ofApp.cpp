@@ -12,7 +12,9 @@ const float NoteB = 123.47;
 const float NoteC2 = 130.81;
 const float NoteD2 = 146.83;
 
-int thres = 50;
+int thres = 110;
+
+int kNUM_NOTES = 1;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -59,24 +61,22 @@ void ofApp::setup(){
 
 void ofApp::updateSensors(){
 #if defined(TARGET_OSX) || defined(TARGET_WIN32)
-    for (int i=0; i<kNUM_ICUBEX_SENSORS; i++){
+    for (int i=0; i<kNUM_NOTES; i++){
         sensorVals[i] = myICube.getSensorData(i);
     }
 #endif // defined(TARGET_OSX) || defined(TARGET_WIN32)
 #if defined(TARGET_RASPBERRY_PI)
     for (int i=0; i<kNUM_ICUBEX_SENSORS; i++){
-        sensorVals[i] = readADC(i);
+        sensorVals[i] = ofMap(readADC(i), 0, 1024, 0, 127);
     }
 #endif //defined(TARGET_RASPBERRY PI)
-
-    //TODO: RPi 10 bit scaling
     
     //now check for thresholds
     
     
-    for (int i=0; i<kNUM_ICUBEX_SENSORS; i++)
+    for (int i=0; i<kNUM_NOTES; i++)
     {
-        if (sensorVals[i]>thres)
+        if (sensorVals[i]<thres)
             keyPressed(keyMap[i]);
         else
             keyReleased(keyMap[i]);
@@ -97,15 +97,15 @@ void ofApp::draw(){
     
 
 
-    for (int i=0; i<kNUM_ICUBEX_SENSORS; i++) {
+    for (int i=0; i<kNUM_NOTES; i++) {
         //draw 8 lines for the notes
         ofSetLineWidth(2.5);
         ofSetColor(0,255,0);
-        int dx = ofGetWidth()/(kNUM_ICUBEX_SENSORS+1);
+        int dx = ofGetWidth()/(kNUM_NOTES+1);
         int x = (i+1)*dx;
         ofLine(x, 0, x, ofGetHeight());
         
-        if (sensorVals[i]>thres) {
+        if (sensorVals[i]<thres) {
             ofSetColor(255, 0, 0);
             ofSetLineWidth(3.0);
             ofLine(x, 0, x, ofGetHeight());
