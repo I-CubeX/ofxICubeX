@@ -25,8 +25,8 @@ void ofApp::setup(){
     gui.add(attack.setup("attack(ms)",10,10,2000));
     gui.add(decay.setup("decay(ms)",200,10,2000));
     gui.add(sustain.setup("sustain",1,0,1));
-    gui.add(release.setup("release(ms)",500,10,2000));
-    gui.add(gain.setup("gain",.5,0,1));
+    gui.add(release.setup("release(ms)",200,10,2000));
+    gui.add(gain.setup("gain",.9,0,1));
     
     drawSynth.setAttack(attack/1000.0);
     drawSynth.setDecay(decay/1000.0);
@@ -41,7 +41,7 @@ void ofApp::setup(){
     gain.addListener(this, &ofApp::adsrChanged);
     
     ofSoundStreamSetup(2, 0);
-    loadWavePreset(2);
+    loadWavePreset(3);
     
 #if defined(TARGET_OSX) || defined(TARGET_WIN32)
     myICube.connectMidiIn(0);
