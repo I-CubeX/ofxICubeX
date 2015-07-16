@@ -288,7 +288,7 @@ void ofApp::loadWavePreset(int preset){
         case 2: //sine
             for (int i=0; i<(int)drawRegion.width; i++){
                 int x = i + drawRegion.x;
-                float y = drawRegion.y+drawRegion.height/2 + drawRegion.height/2 * sin(4*pi*i/drawRegion.width);
+                float y = drawRegion.y+drawRegion.height/2 + drawRegion.height/2 * sin(4*M_PI*i/drawRegion.width);
                 wave.addVertex(x, y);
             }
             break;

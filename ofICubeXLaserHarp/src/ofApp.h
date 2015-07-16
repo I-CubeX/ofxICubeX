@@ -11,6 +11,10 @@
 #include "wiringPiSPI.h"
 #endif //TARGET_RASPBERRY_PI
 
+#ifndef M_PI
+#define M_PI 3.141592654
+#endif
+
 static const char keyMap[] = {'a', 's', 'd', 'f', 'g', 'h', 'j', 'k'};
 
 class ofApp : public ofBaseApp{
