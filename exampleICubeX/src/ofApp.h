@@ -4,7 +4,7 @@
 #include "ofxUI.h"
 #include "ofxMidi.h"
 #include "ofxICubeX.h"
-#include "Math.h"
+#include "math.h"
 
 static const int PANEL_SENSOR_WIDTH = 200;
 static const int PANEL_SENSOR_HEIGHT = 300;

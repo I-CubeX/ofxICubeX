@@ -180,7 +180,7 @@ void ofApp::update(){
                     f = 2 * f* (float)myICubeX.getSensorData(0) / 127.0 + 440;
                 //todo: some basic graphical mapping here.
             }
-            wave_buffer[i] = sin((float)i*f*2*pi/(44100));
+            wave_buffer[i] = sin((float)i*f*2*M_PI/(44100));
         }
     }
     
